@@ -1,0 +1,132 @@
+module SR_flipflop(    input S,    input R,    input CLK,    output P,    output Q  );
+
+
+                 reg qm=0;
+
+
+                always @(posedge CLK)
+
+
+                                if(S==0
+&& R==1) begin
+
+
+                                qm=0;
+
+
+                                end
+
+
+                                else if(S==1 && R==0) begin
+
+
+                                qm=1;
+
+
+                                end
+
+
+                                else if(S==0 && R==0) begin
+
+
+                                qm=P;
+
+
+                                end
+
+
+                                assign P=qm;
+
+
+                                assign Q=~P;
+
+
+endmodule
+
+
+ 
+
+
+ 
+
+
+########## TESTBENCH CODE 
+##########
+
+
+module SR_flipflop_test;
+
+
+                //Inputs
+
+
+                reg S;
+
+
+                reg R;
+
+
+                reg CLK;
+
+
+                // Outputs
+
+
+                wire P;
+
+
+                wire Q;
+
+
+                // Instantiate the Unit Under Test (UUT)
+
+
+                SR_flipflop uut ( .S(S), .R(R), .CLK(CLK), .P(P), .Q(Q));
+
+
+                initial begin
+
+
+                                //Initialize Inputs
+
+
+                                CLK = 1;
+
+
+                                // Wait 100 ns for global reset to finish
+
+
+                                  S=1;
+
+
+                                  R=0;
+
+
+                                  #100;
+
+
+                                  S=0;
+
+
+                                  R=1;
+
+
+                                  #100;
+
+
+                                  S=0;
+
+
+                                  R=0;
+
+
+                                  #100;
+
+
+                                end
+
+
+                                  always  #50  CLK=~CLK;
+
+
+endmodule

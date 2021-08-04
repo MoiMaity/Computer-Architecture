@@ -1,0 +1,62 @@
+##########   Upordown Counter    ##########      
+
+
+module upordown( clk,reset,upordown,count );
+input clk,reset,upordown;
+output [3:0]count;
+reg[3:0]count=0;
+always@(posedge(clk)or posedge(reset))
+begin
+if(reset==1)
+count<=0;
+else
+if(upordown==1)
+if(count==15)
+count<=0;
+else
+count<=count+1;
+else
+if(count==0)
+count<=15;
+else
+count<=count-1;
+end
+endmodule
+
+
+##########  Testbench     ##########      
+
+
+module upordown_test;
+                //Inputs
+                reg clk;
+                reg reset;
+                reg upordown;
+
+
+                //Outputs
+
+
+                wire [3:0] count;
+
+
+                // Instantiate the Unit Under Test (UUT)
+
+
+                upordown uut (.clk(clk), .reset(reset), .upordown(upordown), .count(count));
+
+initial clk=0;
+always  #5 clk=~clk;
+                initial
+begin
+                                //  Initialize Inputs
+                                reset=0;
+                                upordown=0;
+                                // Wait 100 ns for global reset to finish
+                                #100;
+                                upordown=1;
+                                #300;
+                                //Add stimulus here
+                end
+
+endmodule
