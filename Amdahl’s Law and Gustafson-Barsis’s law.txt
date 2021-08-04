@@ -1,0 +1,18 @@
+Amdahl’s law states that the maximum speedup possible in parallelizing an algorithm is
+limited by the sequential portion of the code. Given an algorithm which is P% parallel,
+Amdahl’s law states that: MaximumSpeedup=1/(1- (P/100)). For example if 80% of
+a program is parallel, then the maximum speedup is 1/(1-0.8)=1/.2=5 times. If the program in
+question took 10 seconds to run serially, the best we could hope for in a parallel execution
+would be for it to take 2 seconds (10/5=2). This is because the serial 20% of the program
+cannot be sped up and it takes .2 x 10 seconds = 2 seconds even if the rest of the code is run
+perfectly in parallel on an infinite number of processors so it takes 0 seconds to execute.
+The Gustafson-Barsis law states that speedup tends to increase with problem size (since the
+fraction of time spent executing serial code goes down). Gustafason-Barsis’ law is thus a
+measure of what is known as “scaled speedup” (scaled by the number of processors used on a
+problem) and it can be stated as: MaximumScaledSpeedup=p+(1-p)s, where p is the
+number of processors and s is the fraction of total execution time spent in serial code. This
+law tells us that attainable speedup is often related to problem size not just the number of
+processors used. In essence Amdahl’s law assumes that the percentage of serial code is
+independent of problem size. This is not necessarily true. (E.g. consider overhead for
+managing the parallelism: synchronization, etc.). Thus, in some sense, Gustafon-Barsis’ law
+generalizes Amdahl’s law.
